@@ -24,6 +24,16 @@ export function createAuthLimiter() {
   });
 }
 
+export function createRegisterLimiter() {
+  return rateLimit({
+    windowMs: 60 * 60 * 1000,
+    limit: 10,
+    standardHeaders: 'draft-8',
+    legacyHeaders: false,
+    message: { message: 'Too many accounts created from this network. Please try again in an hour.' },
+  });
+}
+
 export function createApiLimiter() {
   return rateLimit({
     windowMs: 60 * 1000,

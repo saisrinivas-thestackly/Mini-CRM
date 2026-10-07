@@ -13,10 +13,10 @@ function setSession(res, userId) {
   res.cookie(AUTH_COOKIE, signToken(userId), cookieOptions());
 }
 
-export function authRouter({ authLimiter }) {
+export function authRouter({ authLimiter, registerLimiter }) {
   const router = Router();
 
-  router.post('/register', authLimiter, validate({ body: registerBody }), async (req, res) => {
+  router.post('/register', registerLimiter, validate({ body: registerBody }), async (req, res) => {
     const { name, email, password } = req.valid.body;
     if (await User.exists({ email })) throw conflict('An account with this email already exists');
 
