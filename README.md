@@ -4,9 +4,9 @@ A small full-stack CRM for managing **customers**, **deals** (with a drag-and-dr
 
 | | |
 |---|---|
-| **Live app** | `https://<your-app>.vercel.app` |
-| **Live API** | `https://<your-api>.onrender.com/api/health` |
-| **Demo login** | `demo@minicrm.test` / `<demo password>` |
+| **Live app** | https://mini-crm-eta-ten.vercel.app |
+| **Live API** | https://mini-crm-jf3n.onrender.com/api/health |
+| **Demo login** | `demo@minicrm.test` / `Demo@627756` |
 
 ## Screenshots
 
@@ -128,7 +128,7 @@ cd client && npm run lint && npm run build
 
 | Variable | Required | Example |
 |---|---|---|
-| `VITE_API_URL` | yes | `https://mini-crm-api.onrender.com` (no trailing slash, no `/api`) |
+| `VITE_API_URL` | yes | `https://mini-crm-eta-ten.vercel.app` on Vercel (the site's own address, because `/api` is proxied to Render), `http://localhost:5000` locally. No trailing slash, no `/api` |
 
 ## Deployment
 
@@ -138,7 +138,7 @@ cd client && npm run lint && npm run build
 
 After deploying: open a deep link such as `/deals?view=board` and hit refresh; log out and confirm protected pages redirect to `/login`.
 
-> Cookies: the app and API are on different sites, so the session cookie is `SameSite=None; Secure`. Browsers that block third-party cookies (Safari by default) can drop it. If that matters, add a rewrite on Vercel from `/api/(.*)` to the Render URL and set `VITE_API_URL` to the Vercel origin, which makes the cookie first-party.
+> Cookies: `client/vercel.json` forwards `/api/*` from the Vercel site to the Render API, and `VITE_API_URL` is set to the Vercel address. The browser only ever talks to one site, so the session cookie is first-party and login also works in Safari and in private/Incognito windows.
 
 ## API
 
